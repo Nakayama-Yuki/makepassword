@@ -32,7 +32,7 @@ export default function PasswordGenerator() {
   return (
     <div className="p-4 border rounded shadow-md">
       <div className="mb-4">
-        <label className="block mb-2">Password Length:</label>
+        <label className="block mb-2">パスワードの長さ:</label>
         <input
           type="number"
           value={length}
@@ -47,7 +47,7 @@ export default function PasswordGenerator() {
             checked={includeUppercase}
             onChange={(e) => setIncludeUppercase(e.target.checked)}
           />
-          Include Uppercase Letters
+          大文字を含む
         </label>
         <label className="block">
           <input
@@ -55,7 +55,7 @@ export default function PasswordGenerator() {
             checked={includeNumbers}
             onChange={(e) => setIncludeNumbers(e.target.checked)}
           />
-          Include Numbers
+          数字を含む
         </label>
         <label className="block">
           <input
@@ -63,16 +63,16 @@ export default function PasswordGenerator() {
             checked={includeSymbols}
             onChange={(e) => setIncludeSymbols(e.target.checked)}
           />
-          Include Symbols
+          記号を含む
         </label>
       </div>
       <button
         onClick={generatePassword}
         className="w-full p-2 bg-blue-500 text-white rounded">
-        Generate Password
+        パスワードを生成する
       </button>
       <div className="mt-4">
-        <label className="block mb-2">Generated Password:</label>
+        <label className="block mb-2">生成されたパスワード:</label>
         <input
           type="text"
           value={password}
