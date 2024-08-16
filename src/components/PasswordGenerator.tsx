@@ -8,6 +8,7 @@ export default function PasswordGenerator() {
   const [includeUppercase, setIncludeUppercase] = useState(true);
   const [includeNumbers, setIncludeNumbers] = useState(true);
   const [includeSymbols, setIncludeSymbols] = useState(true);
+  const [copySuccess, setCopySuccess] = useState("");
 
   const generatePassword = () => {
     const lowercase = "abcdefghijklmnopqrstuvwxyz";
@@ -27,6 +28,16 @@ export default function PasswordGenerator() {
     }
 
     setPassword(newPassword);
+    setCopySuccess(""); // Reset the copy success message
+  };
+
+  const handleCopyToClipboard = async () => {
+    try {
+      await navigator.clipboard.writeText(password);
+      setCopySuccess("コピーに成功した!");
+    } catch (err) {
+      setCopySuccess("コピーに失敗した!");
+    }
   };
 
   return (
@@ -73,7 +84,10 @@ export default function PasswordGenerator() {
       </div>
       <button
         onClick={generatePassword}
-        className="w-full p-2 bg-blue-500 text-white rounded">
+        disabled={length <= 7}
+        className="w-full p-2 bg-blue-500 text-white rounded
+        disabled:bg-blue-300
+        disabled:cursor-not-allowed">
         パスワードを生成する
       </button>
       <div className="mt-4">
@@ -88,6 +102,13 @@ export default function PasswordGenerator() {
           className="w-full p-2 border rounded"
         />
       </div>
+      <button
+        onClick={handleCopyToClipboard}
+        className="w-full p-2 mt-2 bg-green-500 text-white rounded disabled:bg-green-300 disabled:cursor-not-allowed"
+        disabled={!password}>
+        クリップボードにコピー
+      </button>
+      {copySuccess && <p className="mt-2 text-green-600">{copySuccess}</p>}
     </div>
   );
 }
