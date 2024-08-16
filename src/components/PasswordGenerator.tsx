@@ -44,12 +44,12 @@ export default function PasswordGenerator() {
     <div className="p-4 border rounded shadow-md">
       <div className="mb-4">
         <label htmlFor="passWordLength" className="block mb-2">
-          パスワードの長さ(8-64)
+          パスワードの長さ(8-32)
         </label>
         <input
           type="number"
           value={length}
-          max={64}
+          max={32}
           min={8}
           id="passWordLength"
           onChange={(e) => setLength(Number(e.target.value))}
