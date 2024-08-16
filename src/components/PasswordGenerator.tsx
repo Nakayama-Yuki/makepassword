@@ -32,10 +32,15 @@ export default function PasswordGenerator() {
   return (
     <div className="p-4 border rounded shadow-md">
       <div className="mb-4">
-        <label className="block mb-2">パスワードの長さ:</label>
+        <label htmlFor="passWordLength" className="block mb-2">
+          パスワードの長さ(8-64)
+        </label>
         <input
           type="number"
           value={length}
+          max={64}
+          min={8}
+          id="passWordLength"
           onChange={(e) => setLength(Number(e.target.value))}
           className="w-full p-2 border rounded"
         />
@@ -72,11 +77,14 @@ export default function PasswordGenerator() {
         パスワードを生成する
       </button>
       <div className="mt-4">
-        <label className="block mb-2">生成されたパスワード:</label>
+        <label htmlFor="generatedPassWord" className="block mb-2">
+          生成されたパスワード:
+        </label>
         <input
           type="text"
           value={password}
           readOnly
+          id="generatedPassWord"
           className="w-full p-2 border rounded"
         />
       </div>
