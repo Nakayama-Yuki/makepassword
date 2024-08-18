@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import CopyButton from "@/components/CopyButton";
 
 export default function PasswordGenerator() {
   const [password, setPassword] = useState("");
@@ -28,16 +29,6 @@ export default function PasswordGenerator() {
     }
 
     setPassword(newPassword);
-    setCopySuccess(""); // Reset the copy success message
-  };
-
-  const handleCopyToClipboard = async () => {
-    try {
-      await navigator.clipboard.writeText(password);
-      setCopySuccess("コピーに成功した!");
-    } catch (err) {
-      setCopySuccess("コピーに失敗した!");
-    }
   };
 
   return (
@@ -102,13 +93,7 @@ export default function PasswordGenerator() {
           className="w-full p-2 border rounded"
         />
       </div>
-      <button
-        onClick={handleCopyToClipboard}
-        className="w-full p-2 mt-2 bg-green-500 text-white rounded disabled:bg-green-300 disabled:cursor-not-allowed"
-        disabled={!password}>
-        クリップボードにコピー
-      </button>
-      {copySuccess && <p className="mt-2 text-green-600">{copySuccess}</p>}
+      <CopyButton textToCopy={password} />
     </div>
   );
 }
