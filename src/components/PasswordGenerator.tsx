@@ -5,6 +5,7 @@ import CopyButton from "@/components/CopyButton";
 import PasswordGeneratorLogic from "@/components/PasswordGeneratorLogic";
 import PasswordLengthInput from "@/components/PasswordLengthInput";
 import CheckboxOption from "@/components/CheckboxOption";
+import PasswordDisplay from "@/components/PasswordDisplay";
 
 export default function PasswordGenerator() {
   const [password, setPassword] = useState("");
@@ -16,7 +17,7 @@ export default function PasswordGenerator() {
   return (
     <div className="p-4 border rounded shadow-md">
       <PasswordLengthInput length={length} setLength={setLength} />
-      <div className="mb4">
+      <div>
         <CheckboxOption
           label="大文字を含む"
           checked={includeUppercase}
@@ -40,18 +41,7 @@ export default function PasswordGenerator() {
         includeSymbols={includeSymbols}
         setPassword={setPassword}
       />
-      <div className="mt-4">
-        <label htmlFor="generatedPassWord" className="block mb-2">
-          生成されたパスワード:
-        </label>
-        <input
-          type="text"
-          value={password}
-          readOnly
-          id="generatedPassWord"
-          className="w-full p-2 border rounded"
-        />
-      </div>
+      <PasswordDisplay password={password} />
       <CopyButton textToCopy={password} />
     </div>
   );
