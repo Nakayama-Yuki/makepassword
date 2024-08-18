@@ -9,7 +9,6 @@ export default function PasswordGenerator() {
   const [includeUppercase, setIncludeUppercase] = useState(true);
   const [includeNumbers, setIncludeNumbers] = useState(true);
   const [includeSymbols, setIncludeSymbols] = useState(true);
-  const [copySuccess, setCopySuccess] = useState("");
 
   const generatePassword = () => {
     const lowercase = "abcdefghijklmnopqrstuvwxyz";
