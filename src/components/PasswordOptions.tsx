@@ -1,6 +1,3 @@
-
-import { useState } from "react";
-
 interface PasswordOptionsProps {
   length: number;
   includeUppercase: boolean;
