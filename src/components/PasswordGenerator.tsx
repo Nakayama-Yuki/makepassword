@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import CopyButton from "@/components/CopyButton";
+import PasswordGeneratorLogic from "@/components/PasswordGeneratorLogic";
 
 export default function PasswordGenerator() {
   const [password, setPassword] = useState("");
@@ -9,26 +10,6 @@ export default function PasswordGenerator() {
   const [includeUppercase, setIncludeUppercase] = useState(true);
   const [includeNumbers, setIncludeNumbers] = useState(true);
   const [includeSymbols, setIncludeSymbols] = useState(true);
-
-  const generatePassword = () => {
-    const lowercase = "abcdefghijklmnopqrstuvwxyz";
-    const uppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    const numbers = "0123456789";
-    const symbols = "!@#$%^&*()_+-=[]{}|;:,.<>?";
-
-    let characters = lowercase;
-    if (includeUppercase) characters += uppercase;
-    if (includeNumbers) characters += numbers;
-    if (includeSymbols) characters += symbols;
-
-    let newPassword = "";
-    for (let i = 0; i < length; i++) {
-      const randomIndex = Math.floor(Math.random() * characters.length);
-      newPassword += characters[randomIndex];
-    }
-
-    setPassword(newPassword);
-  };
 
   return (
     <div className="p-4 border rounded shadow-md">
@@ -72,14 +53,13 @@ export default function PasswordGenerator() {
           記号を含む
         </label>
       </div>
-      <button
-        onClick={generatePassword}
-        disabled={length <= 7}
-        className="w-full p-2 bg-blue-500 text-white rounded
-        disabled:bg-blue-300
-        disabled:cursor-not-allowed">
-        パスワードを生成する
-      </button>
+      <PasswordGeneratorLogic
+        length={length}
+        includeUppercase={includeUppercase}
+        includeNumbers={includeNumbers}
+        includeSymbols={includeSymbols}
+        setPassword={setPassword}
+      />
       <div className="mt-4">
         <label htmlFor="generatedPassWord" className="block mb-2">
           生成されたパスワード:
