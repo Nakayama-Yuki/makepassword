@@ -1,9 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import PasswordOptions from "./PasswordOptions";
-import PasswordDisplay from "./PasswordDisplay";
-import CopyButton from "./CopyButton";
+import CopyButton from "@/components/CopyButton";
+import PasswordGeneratorLogic from "@/components/PasswordGeneratorLogic";
+import PasswordLengthInput from "@/components/PasswordLengthInput";
+import CheckboxOption from "@/components/CheckboxOption";
+import PasswordDisplay from "@/components/PasswordDisplay";
 
 export default function PasswordGenerator() {
   const [password, setPassword] = useState("");
@@ -11,60 +13,36 @@ export default function PasswordGenerator() {
   const [includeUppercase, setIncludeUppercase] = useState(true);
   const [includeNumbers, setIncludeNumbers] = useState(true);
   const [includeSymbols, setIncludeSymbols] = useState(true);
-  const [copySuccess, setCopySuccess] = useState("");
-
-  const generatePassword = () => {
-    const lowercase = "abcdefghijklmnopqrstuvwxyz";
-    const uppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    const numbers = "0123456789";
-    const symbols = "!@#$%^&*()_+-=[]{}|;:,.<>?";
-
-    let characters = lowercase;
-    if (includeUppercase) characters += uppercase;
-    if (includeNumbers) characters += numbers;
-    if (includeSymbols) characters += symbols;
-
-    let newPassword = "";
-    for (let i = 0; i < length; i++) {
-      const randomIndex = Math.floor(Math.random() * characters.length);
-      newPassword += characters[randomIndex];
-    }
-
-    setPassword(newPassword);
-    setCopySuccess(""); // Reset the copy success message
-  };
-
-  const handleCopyToClipboard = () => {
-    navigator.clipboard.writeText(password).then(
-      () => setCopySuccess("コピーしました！"),
-      () => setCopySuccess("コピーに失敗しました。")
-    );
-  };
 
   return (
-    <div>
-      <PasswordOptions
+    <div className="p-4 border rounded shadow-md">
+      <PasswordLengthInput length={length} setLength={setLength} />
+      <div>
+        <CheckboxOption
+          label="大文字を含む"
+          checked={includeUppercase}
+          onChange={setIncludeUppercase}
+        />
+        <CheckboxOption
+          label="数字を含む"
+          checked={includeNumbers}
+          onChange={setIncludeNumbers}
+        />
+        <CheckboxOption
+          label="記号を含む"
+          checked={includeSymbols}
+          onChange={setIncludeSymbols}
+        />
+      </div>
+      <PasswordGeneratorLogic
         length={length}
         includeUppercase={includeUppercase}
         includeNumbers={includeNumbers}
         includeSymbols={includeSymbols}
-        setLength={setLength}
-        setIncludeUppercase={setIncludeUppercase}
-        setIncludeNumbers={setIncludeNumbers}
-        setIncludeSymbols={setIncludeSymbols}
+        setPassword={setPassword}
       />
-      <button
-        onClick={generatePassword}
-        disabled={length <= 7}
-        className="w-full p-2 bg-blue-500 text-white rounded disabled:bg-blue-300 disabled:cursor-not-allowed">
-        パスワードを生成する
-      </button>
       <PasswordDisplay password={password} />
-      <CopyButton
-        password={password}
-        copySuccess={copySuccess}
-        handleCopyToClipboard={handleCopyToClipboard}
-      />
+      <CopyButton textToCopy={password} />
     </div>
   );
 }

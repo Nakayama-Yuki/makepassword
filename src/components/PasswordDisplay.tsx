@@ -1,20 +1,10 @@
-<<<<<<< HEAD
 import React from "react";
 
-=======
->>>>>>> 0977db896b6f2cf308d17a4c71165f643e960fef
 interface PasswordDisplayProps {
   password: string;
 }
 
-<<<<<<< HEAD
 const PasswordDisplay: React.FC<PasswordDisplayProps> = ({ password }) => {
-  return <div>{password}</div>;
-};
-
-export default PasswordDisplay;
-=======
-export default function PasswordDisplay({ password }: PasswordDisplayProps) {
   return (
     <div className="mt-4">
       <label htmlFor="generatedPassWord" className="block mb-2">
@@ -29,5 +19,6 @@ export default function PasswordDisplay({ password }: PasswordDisplayProps) {
       />
     </div>
   );
-}
->>>>>>> 0977db896b6f2cf308d17a4c71165f643e960fef
+};
+
+export default PasswordDisplay;
