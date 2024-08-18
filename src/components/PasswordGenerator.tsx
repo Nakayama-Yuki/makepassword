@@ -4,6 +4,7 @@ import { useState } from "react";
 import CopyButton from "@/components/CopyButton";
 import PasswordGeneratorLogic from "@/components/PasswordGeneratorLogic";
 import PasswordLengthInput from "@/components/PasswordLengthInput";
+import CheckboxOption from "@/components/CheckboxOption";
 
 export default function PasswordGenerator() {
   const [password, setPassword] = useState("");
@@ -15,31 +16,22 @@ export default function PasswordGenerator() {
   return (
     <div className="p-4 border rounded shadow-md">
       <PasswordLengthInput length={length} setLength={setLength} />
-      <div className="mb-4">
-        <label className="block">
-          <input
-            type="checkbox"
-            checked={includeUppercase}
-            onChange={(e) => setIncludeUppercase(e.target.checked)}
-          />
-          大文字を含む
-        </label>
-        <label className="block">
-          <input
-            type="checkbox"
-            checked={includeNumbers}
-            onChange={(e) => setIncludeNumbers(e.target.checked)}
-          />
-          数字を含む
-        </label>
-        <label className="block">
-          <input
-            type="checkbox"
-            checked={includeSymbols}
-            onChange={(e) => setIncludeSymbols(e.target.checked)}
-          />
-          記号を含む
-        </label>
+      <div className="mb4">
+        <CheckboxOption
+          label="大文字を含む"
+          checked={includeUppercase}
+          onChange={setIncludeUppercase}
+        />
+        <CheckboxOption
+          label="数字を含む"
+          checked={includeNumbers}
+          onChange={setIncludeNumbers}
+        />
+        <CheckboxOption
+          label="記号を含む"
+          checked={includeSymbols}
+          onChange={setIncludeSymbols}
+        />
       </div>
       <PasswordGeneratorLogic
         length={length}
