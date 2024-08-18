@@ -3,6 +3,7 @@
 import { useState } from "react";
 import CopyButton from "@/components/CopyButton";
 import PasswordGeneratorLogic from "@/components/PasswordGeneratorLogic";
+import PasswordLengthInput from "@/components/PasswordLengthInput";
 
 export default function PasswordGenerator() {
   const [password, setPassword] = useState("");
@@ -13,20 +14,7 @@ export default function PasswordGenerator() {
 
   return (
     <div className="p-4 border rounded shadow-md">
-      <div className="mb-4">
-        <label htmlFor="passWordLength" className="block mb-2">
-          パスワードの長さ(8-32)
-        </label>
-        <input
-          type="number"
-          value={length}
-          max={32}
-          min={8}
-          id="passWordLength"
-          onChange={(e) => setLength(Number(e.target.value))}
-          className="w-full p-2 border rounded"
-        />
-      </div>
+      <PasswordLengthInput length={length} setLength={setLength} />
       <div className="mb-4">
         <label className="block">
           <input
