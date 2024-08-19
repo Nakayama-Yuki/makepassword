@@ -21,7 +21,7 @@ const PasswordLengthInput: React.FC<PasswordLengthInputProps> = ({
         min={8}
         id="passWordLength"
         onChange={(e) => setLength(Number(e.target.value))}
-        className="w-full p-2 border rounded"
+        className="password-text p-2 border rounded w-full"
       />
     </div>
   );

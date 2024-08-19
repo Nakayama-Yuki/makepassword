@@ -15,7 +15,7 @@ const PasswordDisplay: React.FC<PasswordDisplayProps> = ({ password }) => {
         value={password}
         readOnly
         id="generatedPassWord"
-        className="w-full p-2 border rounded"
+        className="password-text p-2 border rounded w-full"
       />
     </div>
   );
